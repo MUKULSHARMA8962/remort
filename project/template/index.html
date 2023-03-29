@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My jQuery App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div id="my-data"></div>
+    <script>
+      $(document).ready(function() {
+        $.ajax({
+          url: 'http://127.0.0.1:8000/books/',
+          type: 'GET',
+          success: function(data) {
+            // Add the data to the HTML
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+              html += '<div>';
+              html += '<h2>' + data[i].title + '</h2>';
+              html += '<p>' + data[i].description + '</p>';
+              html += '</div>';
+            }
+            $('#my-data').html(html);
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
